@@ -15,8 +15,6 @@ def generate_shuffled_deck():
 def draw(deck, n):
     table = deck[:n]
     deck = deck[n:]
-    # print(f"table len: {len(table)}")
-    # print(f"deck len: {len(deck)}")
     return deck, table
 
 
@@ -49,9 +47,16 @@ def add_one_card_to_table(deck, table):
 if __name__ == "__main__":
     deck = generate_shuffled_deck()
     deck, table = first_draw(deck)
+    while len(deck) != 0:
+        # find sets on table
+        sets = get_sets_on_table(table)
+        num_sets = len(sets)
+        # if multiple sets, pick one arbitrarily and add 3 cards from deck
+        # if num_sets > 0:
+
+    # elif 0 sets, add 1 card from deck
+    # deck is empty, find remaining sets
+
     # num_sets = 0
     # while num_sets == 0:
-    #     # CONT HERE
-    #     sets = get_sets_on_table(table)
-    #     num_sets = sets.shape[0]
     #     deck, table = add_one_card_to_table(deck, table)
