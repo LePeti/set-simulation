@@ -1,5 +1,17 @@
-from functions.my_functions import add_three
+from itertools import product
+from random import shuffle
 
-print("start")
-print(add_three(1))
-print("end")
+import numpy as np
+
+
+def generate_shuffled_deck():
+    deck = list(product(range(3), repeat=4))
+    shuffle(deck)
+    return np.array(deck)
+
+
+if __name__ == "__main__":
+    deck = generate_shuffled_deck()
+    print(deck)
+    print(type(deck))
+    print(len(deck))
