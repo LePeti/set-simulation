@@ -82,4 +82,7 @@ if __name__ == "__main__":
 
     print(f"Remaining cards in deck: {len(deck)}")
     print(f"Remaining cards on table: {len(table)}")
-    print(f"Number of sets found: {len(removed_sets)} ({len(removed_sets) * 3} cards)")
+    print(
+        f"Number of sets found: {len(removed_sets)}",
+        f" ({len(removed_sets) * 3} cards)"
+    )
