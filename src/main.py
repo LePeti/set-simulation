@@ -4,8 +4,6 @@ from itertools import combinations, product
 
 import numpy as np
 
-# TODO add logging
-
 random.seed(123)
 logging.basicConfig(level=logging.DEBUG)
 
@@ -78,13 +76,16 @@ if __name__ == "__main__":
             table = remove_set_from_table(table, chosen_set)
             logging.info(f"Cards on the table: {len(table)}")
             deck, table = add_three_cards_to_table(deck, table)
-            logging.info(f"Adding new cards from deck. Num cards in deck/table: {len(deck)}/{len(table)}")
+            logging.info(
+                f"Adding new cards from deck. Num cards in deck/table: "
+                f"{len(deck)}/{len(table)}"
+            )
         else:
             deck, table = add_one_card_to_table(deck, table)
-    logging.info(f"No more cards in deck.")
+    logging.info("No more cards in deck.")
     logging.info(f"Remaining cards on table: {len(table)}")
 
-    logging.info(f"Looking for remaining sets on table.")
+    logging.info("Looking for remaining sets on table.")
     remaining_sets_on_table = get_sets_on_table(table)
     while len(remaining_sets_on_table) > 0:
         logging.info("Found one, looking for more.")
@@ -93,12 +94,12 @@ if __name__ == "__main__":
         table = remove_set_from_table(table, chosen_set)
         remaining_sets_on_table = get_sets_on_table(table)
 
-    logging.info(f"No more cards in deck, no more sets on table.")
+    logging.info("No more cards in deck, no more sets on table.")
     logging.info(f"Remaining cards on table: {len(table)}")
 
-    print(f"Remaining cards in deck: {len(deck)}")
-    print(f"Remaining cards on table: {len(table)}")
-    print(
-        f"Number of sets found: {len(removed_sets)}",
-        f" ({len(removed_sets) * 3} cards)"
+    logging.info(f"Remaining cards in deck: {len(deck)}")
+    logging.info(f"Remaining cards on table: {len(table)}")
+    logging.info(
+        f"Number of sets found: {len(removed_sets)} "
+        f"({len(removed_sets) * 3} cards)"
     )
