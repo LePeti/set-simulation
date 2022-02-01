@@ -3,6 +3,7 @@ import random
 from itertools import combinations, product
 
 import numpy as np
+from functions.draw_cards import draw_cards, translate_vecs_to_cards
 
 random.seed(123)
 logging.basicConfig(level=logging.DEBUG)
@@ -71,6 +72,7 @@ if __name__ == "__main__":
         if num_sets > 0:
             chosen_set = random.choice(sets)
             logging.info(f"Chosen set: \n {chosen_set} \n")
+            draw_cards(translate_vecs_to_cards(chosen_set))
             removed_sets.append(chosen_set)
             logging.info(f"Number of sets so far: {len(removed_sets)}")
             table = remove_set_from_table(table, chosen_set)
@@ -94,6 +96,7 @@ if __name__ == "__main__":
         table = remove_set_from_table(table, chosen_set)
         remaining_sets_on_table = get_sets_on_table(table)
 
+    draw_cards(translate_vecs_to_cards(table))
     logging.info("No more cards in deck, no more sets on table.")
     logging.info(f"Remaining cards on table: {len(table)}")
 

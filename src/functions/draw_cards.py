@@ -1,18 +1,43 @@
+import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.patches import Ellipse, Rectangle, RegularPolygon
 
 
-def draw_n_shape(color, n, shape, pattern):
-    shape_instances = gen_shape_instances(color, n, shape, pattern)
+def draw_cards(cards):
+    """Draws one or multiple SET cards on a single plot
 
-    fig, ax = plt.subplots(figsize=(2, 3))
-    for instance in shape_instances:
-        ax.add_patch(instance)
+    Args:
+        cards (list): List of definition of SET cards
+        Example: cards=[{"num": 3, "shape": "ellipse", "color": "b", "pattern": "dotted"}]
 
-    ax.set_xlim([0, 2])
-    ax.set_ylim([0, 3])
-    plt.xticks(ticks=[], labels=[])
-    plt.yticks(ticks=[], labels=[])
+    Returns:
+        None: Draws the plot with cards
+    """
+    rows = int(np.ceil(len(cards) / 3))
+    cols = int(len(cards) if len(cards) <= 2 else 3)
+    height = rows * 3
+    width = cols * 2
+    fig, ax = plt.subplots(rows, cols, figsize=(width, height))
+    ax = ax.flatten()
+    fig.patch.set_facecolor("w")
+
+    for i, card in enumerate(cards):
+        shape_instances = gen_shape_instances(
+            card["color"], card["num"], card["shape"], card["pattern"]
+        )
+
+        for instance in shape_instances:
+            ax[i].add_patch(instance)
+
+        ax[i].set_xlim([0, 2])
+        ax[i].set_ylim([0, 3])
+        ax[i].set_xticks([])
+        ax[i].set_yticks([])
+
+    # removing ticks from remaining empty subplots
+    for i in range(len(card), len(ax)):
+        ax[i].set_xticks([])
+        ax[i].set_yticks([])
 
     return None
 
@@ -55,7 +80,7 @@ def gen_shape_instances(color, n, shape, pattern):
             )
             shape_instance.set(
                 fc=color, edgecolor=color, lw=2, fill=is_filled, hatch=hatching
-            ),
+            )
             shape_instances.append(shape_instance)
     else:
         raise ValueError(f"Incorrect shape provided: {shape}")
@@ -86,6 +111,19 @@ def get_shape_properties(shape):
     return properties[shape]
 
 
-draw_n_shape("b", 3, "rectangle", "filled")
-draw_n_shape("b", 2, "ellipse", "dotted")
-draw_n_shape("b", 1, "triangle", "empty")
+def translate_vecs_to_cards(vecs):
+    card_attribute_values = {
+        "shape": ["ellipse", "rectangle", "triangle"],
+        "num": [1, 2, 3],
+        "color": ["blue", "green", "red"],
+        "pattern": ["empty", "filled", "dotted"],
+    }
+    cards = []
+    for vec in vecs:
+        card = {
+            attr: values[vec[i]]
+            for i, (attr, values) in enumerate(card_attribute_values.items())
+        }
+        cards.append(card)
+
+    return cards
