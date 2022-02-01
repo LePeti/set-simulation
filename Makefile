@@ -11,7 +11,7 @@ test: ## Run flake8 syntax and codestyle check, then run tests with pytest
 	pytest
 	make clean
 
-format: ## Run flake8 syntax and codestyle check, then run tests with pytest
+format: ## Format with black, then run flake8 syntax and codestyle check
 	black src tests
 	flake8 src tests
 
