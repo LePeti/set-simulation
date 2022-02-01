@@ -8,7 +8,8 @@
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [
         "--max-line-length 90",
-        "--extend-ignore E203,W503" // this makes flake8 compatible w/ black
+        "--extend-ignore E203,W503", // this makes flake8 compatible w/ black
+        "--exclude scratchpad.py"
     ],
     "editor.rulers": [
         90
