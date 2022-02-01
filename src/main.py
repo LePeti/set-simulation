@@ -100,6 +100,5 @@ if __name__ == "__main__":
     logging.info(f"Remaining cards in deck: {len(deck)}")
     logging.info(f"Remaining cards on table: {len(table)}")
     logging.info(
-        f"Number of sets found: {len(removed_sets)} "
-        f"({len(removed_sets) * 3} cards)"
+        f"Number of sets found: {len(removed_sets)} " f"({len(removed_sets) * 3} cards)"
     )
