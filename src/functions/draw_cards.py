@@ -10,6 +10,8 @@ def draw_n_shape(color, n, shape):
     for instance in shape_instances:
         ax.add_patch(instance)
 
+    ax.set_xlim([0, 2])
+    ax.set_ylim([0, 3])
     plt.xticks(ticks=[], labels=[])
     plt.yticks(ticks=[], labels=[])
 
@@ -24,8 +26,8 @@ def gen_shape_instances(color, n, shape):
         for position in properties.get(n):
             shape_instance = shape_object(
                 xy=(position["x"], position["y"]),
-                width=0.7,
-                height=0.2,
+                width=1.5,
+                height=.5,
                 edgecolor=color,
                 fc=color,
                 lw=0,
@@ -36,7 +38,7 @@ def gen_shape_instances(color, n, shape):
             shape_instance = shape_object(
                 xy=(position["x"], position["y"]),
                 numVertices=3,
-                radius=0.1,
+                radius=0.3,
                 edgecolor=color,
                 fc=color,
                 lw=0,
@@ -50,27 +52,30 @@ def gen_shape_instances(color, n, shape):
 def get_shape_properties(shape):
     properties = {
         "ellipse": {
-            1: [{"x": 0.5, "y": 0.5}],
-            2: [{"x": 0.5, "y": 0.35}, {"x": 0.5, "y": 0.65}],
-            3: [{"x": 0.5, "y": 0.25}, {"x": 0.5, "y": 0.5}, {"x": 0.5, "y": 0.75}],
+            1: [{"x": 1, "y": 1.5}],
+            2: [{"x": 1, "y": 1.15}, {"x": 1, "y": 1.85}],
+            3: [{"x": 1, "y": 0.75}, {"x": 1, "y": 1.5}, {"x": 1, "y": 2.25}],
             "shape": Ellipse,
         },
         "rectangle": {
-            1: [{"x": 0.15, "y": 0.4}],
-            2: [{"x": 0.15, "y": 0.25}, {"x": 0.15, "y": 0.55}],
-            3: [{"x": 0.15, "y": 0.15}, {"x": 0.15, "y": 0.4}, {"x": 0.15, "y": 0.65}],
+            1: [{"x": 0.25, "y": 1.25}],
+            2: [{"x": 0.25, "y": 0.9}, {"x": 0.25, "y": 1.6}],
+            3: [{"x": 0.25, "y": .5}, {"x": 0.25, "y": 1.25}, {"x": 0.25, "y": 2}],
             "shape": Rectangle,
         },
         "triangle": {
-            1: [{"x": 0.5, "y": 0.5}],
-            2: [{"x": 0.5, "y": 0.35}, {"x": 0.5, "y": 0.65}],
-            3: [{"x": 0.5, "y": 0.25}, {"x": 0.5, "y": 0.5}, {"x": 0.5, "y": 0.75}],
+            1: [{"x": 1, "y": 1.5}],
+            2: [{"x": 1, "y": 1.15}, {"x": 1, "y": 1.85}],
+            3: [{"x": 1, "y": 0.75}, {"x": 1, "y": 1.5}, {"x": 1, "y": 2.25}],
             "shape": RegularPolygon,
         },
     }
     return properties[shape]
 
 
-# draw_n_shape("g", 3, "rectangle")
-# draw_n_shape("b", 2, "ellipse")
-# draw_n_shape("r", 3, "triangle")
+draw_n_shape("b", 3, "triangle")
+draw_n_shape("b", 2, "triangle")
+draw_n_shape("b", 1, "triangle")
+
+# ellipse
+# triangle
