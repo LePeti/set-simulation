@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 def generate_shuffled_deck():
     deck = list(product(range(3), repeat=4))
     random.shuffle(deck)
-    logging.info(f"Shuffled deck generated. {len(deck)} cards in deck.")
+    logging.info(f"Shuffled deck generated with {len(deck)} cards.")
     return np.array(deck)
 
 
@@ -56,30 +56,33 @@ if __name__ == "__main__":
     deck, table = first_draw(deck)
     logging.info(f"{len(table)} cards on the table.")
     removed_sets = []
+    round_ = 0
 
     while len(deck) != 0:
+        round_ += 1
         # find sets on table
+        logging.info(f"\n\n-~=ROUND #{round_}=~-\n")
+        logging.info(f"Num cards in deck/table: {len(deck)}/{len(table)}.")
         sets = get_sets_on_table(table)
         num_sets = len(sets)
-        logging.info(f"Found {num_sets} sets on the table")
+        logging.info(f"Found {num_sets} SET(s) on the table.")
         # if multiple sets, pick one arbitrarily and add 3 cards from deck
         if num_sets > 0:
             chosen_set = random.choice(sets)
-            logging.info(f"Chosen set: \n {chosen_set} \n")
             draw_cards(translate_vecs_to_cards(chosen_set))
             removed_sets.append(chosen_set)
-            logging.info(f"Number of sets so far: {len(removed_sets)}")
             table = remove_set_from_table(table, chosen_set)
             deck, table = add_n_cards_to_table(deck, table, 12 - len(table))
             logging.info(
-                f"Adding new cards from deck. Num cards in deck/table: "
-                f"{len(deck)}/{len(table)}"
+                f"Chosen set: \n {chosen_set} \n\n"
+                f"(total SETs so far: {len(removed_sets)})"
             )
+            logging.info("Adding new cards from deck.")
         else:
             deck, table = add_n_cards_to_table(deck, table, 1)
-            deck, table = add_one_card_to_table(deck, table)
+            logging.info("No sets found on the table, adding 1 card.")
     logging.info("No more cards in deck.")
-    logging.info(f"Remaining cards on table: {len(table)}")
+    logging.info(f"Remaining cards on table: {len(table)}.")
 
     logging.info("Looking for remaining sets on table.")
     remaining_sets_on_table = get_sets_on_table(table)
@@ -92,10 +95,9 @@ if __name__ == "__main__":
 
     draw_cards(translate_vecs_to_cards(table), "Cards left on the table w/o any SETs")
     logging.info("No more cards in deck, no more sets on table.")
-    logging.info(f"Remaining cards on table: {len(table)}")
 
-    logging.info(f"Remaining cards in deck: {len(deck)}")
-    logging.info(f"Remaining cards on table: {len(table)}")
+    logging.info(f"Remaining cards in deck: {len(deck)}.")
+    logging.info(f"Remaining cards on table: {len(table)}.")
     logging.info(
-        f"Number of sets found: {len(removed_sets)} " f"({len(removed_sets) * 3} cards)"
+        f"Number of sets found: {len(removed_sets)} " f"({len(removed_sets) * 3} cards.)"
     )
