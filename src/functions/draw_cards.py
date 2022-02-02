@@ -3,12 +3,20 @@ from matplotlib import pyplot as plt
 from matplotlib.patches import Ellipse, Rectangle, RegularPolygon
 
 
-def draw_cards(cards):
+def draw_cards(cards, title=None):
     """Draws one or multiple SET cards on a single plot
 
     Args:
-        cards (list): List of definition of SET cards
-        Example: cards=[{"num": 3, "shape": "ellipse", "color": "b", "pattern": "dotted"}]
+        cards (list): List of definition of SET cards. Example:
+            `cards=[{"num": 3, "shape": "ellipse", "color": "b", "pattern": "dotted"}]`
+        title (str): Title of the drawn cards
+
+        Example: `draw_cards(
+            [{"num": 1, "shape": "ellipse", "color": "b", "pattern": "dotted"},
+            {"num": 2, "shape": "triangle", "color": "r", "pattern": "filled"},
+            {"num": 3, "shape": "rectangle", "color": "g", "pattern": "empty"}],
+            title="a SET"
+        )`
 
     Returns:
         None: Draws the plot with cards
@@ -20,6 +28,7 @@ def draw_cards(cards):
     fig, ax = plt.subplots(rows, cols, figsize=(width, height))
     ax = ax.flatten()
     fig.patch.set_facecolor("w")
+    fig.suptitle(title)
 
     for i, card in enumerate(cards):
         shape_instances = gen_shape_instances(

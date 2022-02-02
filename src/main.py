@@ -6,7 +6,7 @@ import numpy as np
 from functions.draw_cards import draw_cards, translate_vecs_to_cards
 
 random.seed(123)
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 def generate_shuffled_deck():
@@ -96,7 +96,7 @@ if __name__ == "__main__":
         table = remove_set_from_table(table, chosen_set)
         remaining_sets_on_table = get_sets_on_table(table)
 
-    draw_cards(translate_vecs_to_cards(table))
+    draw_cards(translate_vecs_to_cards(table), "Cards left on the table w/o any SETs")
     logging.info("No more cards in deck, no more sets on table.")
     logging.info(f"Remaining cards on table: {len(table)}")
 
