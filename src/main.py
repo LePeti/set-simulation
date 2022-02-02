@@ -60,13 +60,11 @@ if __name__ == "__main__":
 
     while len(deck) != 0:
         round_ += 1
-        # find sets on table
         logging.info(f"\n\n-~=ROUND #{round_}=~-\n")
         logging.info(f"Num cards in deck/table: {len(deck)}/{len(table)}.")
         sets = get_sets_on_table(table)
         num_sets = len(sets)
         logging.info(f"Found {num_sets} SET(s) on the table.")
-        # if multiple sets, pick one arbitrarily and add 3 cards from deck
         if num_sets > 0:
             chosen_set = random.choice(sets)
             draw_cards(translate_vecs_to_cards(chosen_set))
