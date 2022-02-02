@@ -36,15 +36,9 @@ def get_sets_on_table(table):
     return sets
 
 
-def add_three_cards_to_table(deck, table):
-    table = np.concatenate([table, deck[:3]])
-    deck = deck[3:]
-    return deck, table
-
-
-def add_one_card_to_table(deck, table):
-    table = np.concatenate([table, deck[:1]])
-    deck = deck[1:]
+def add_n_cards_to_table(deck, table, n):
+    table = np.concatenate([table, deck[:n]])
+    deck = deck[n:]
     return deck, table
 
 
@@ -76,13 +70,13 @@ if __name__ == "__main__":
             removed_sets.append(chosen_set)
             logging.info(f"Number of sets so far: {len(removed_sets)}")
             table = remove_set_from_table(table, chosen_set)
-            logging.info(f"Cards on the table: {len(table)}")
-            deck, table = add_three_cards_to_table(deck, table)
+            deck, table = add_n_cards_to_table(deck, table, 12 - len(table))
             logging.info(
                 f"Adding new cards from deck. Num cards in deck/table: "
                 f"{len(deck)}/{len(table)}"
             )
         else:
+            deck, table = add_n_cards_to_table(deck, table, 1)
             deck, table = add_one_card_to_table(deck, table)
     logging.info("No more cards in deck.")
     logging.info(f"Remaining cards on table: {len(table)}")
