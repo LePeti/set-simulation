@@ -1,5 +1,5 @@
 {
-    "jupyter.notebookFileRoot": "${workspaceFolder}/src",
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
     "jupyter.runStartupCommands": "%load_ext autoreload\n%autoreload 2",
     "python.formatting.provider": "black",
     "python.formatting.blackArgs": [
