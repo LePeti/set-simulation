@@ -3,11 +3,10 @@ import random
 from datetime import datetime
 from itertools import combinations, product
 
-import matplotlib.ticker as mtick
 import numpy as np
 import pandas as pd
-from functions.draw_cards import draw_cards, translate_vecs_to_cards
-from matplotlib import pyplot as plt
+import os
+from src.functions.draw_cards import draw_cards, translate_vecs_to_cards
 
 random.seed(123)
 logging.basicConfig(level=logging.WARNING)
@@ -78,7 +77,7 @@ def get_simul_data_col_names():
 if __name__ == "__main__":
     simul_data = pd.DataFrame(columns=get_simul_data_col_names())
     game_id = 0
-    for game in range(100):
+    for game in range(1):
         logging.warning(f"Game simulation round #{game} ({game:.0f}%)")
         game_id += 1
         deck = generate_shuffled_deck()
@@ -197,13 +196,7 @@ if __name__ == "__main__":
         )
         simul_data = pd.concat([simul_data, game_data], ignore_index=True)
 
-
-(
-    simul_data.query("num_cards_table >= 12")["num_sets"]
-    .value_counts(normalize=True)
-    .reset_index()
-    .query("num_sets >= 0.01")
-    .plot(kind="bar", x="index", y="num_sets")
-)
-ax = plt.gca()
-ax.yaxis.set_major_formatter(mtick.PercentFormatter(1, decimals=0))
+time_ = datetime.now()
+data_file_name = f"set_simul_{time_.strftime('%Y%m%d')}_{time_.strftime('%f')}.pkl"
+artifacts_folder = os.path.join("artifacts", data_file_name)
+simul_data.to_pickle(artifacts_folder)
