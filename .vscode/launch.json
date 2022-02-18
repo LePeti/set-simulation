@@ -13,7 +13,8 @@
             "autoReload": {
               "enable": true
             },
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "env": { "PYTHONPATH": "${workspaceFolder}"}
         },
 
     ]
