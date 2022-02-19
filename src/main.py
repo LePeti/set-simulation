@@ -78,7 +78,7 @@ if __name__ == "__main__":
     simul_data = pd.DataFrame(columns=get_simul_data_col_names())
     game_id = 0
     for game in range(1):
-        logging.warning(f"Game simulation round #{game} ({game:.0f}%)")
+        logging.warning(f"Game simulation round #{game + 1} ({game + 1:.0f}%)")
         game_id += 1
         deck = generate_shuffled_deck()
         deck, table = first_draw(deck)
@@ -183,9 +183,7 @@ if __name__ == "__main__":
         round_data["chosen_set"] = [remaining_sets_on_table]
         game_data = pd.concat([game_data, round_data], ignore_index=True)
 
-        draw_cards(
-            translate_vecs_to_cards(table), "Cards left on the table w/o any SETs"
-        )
+        draw_cards(translate_vecs_to_cards(table), "Cards left on the table w/o any SETs")
         logging.info("No more cards in deck, no more sets on table.")
 
         logging.info(f"Remaining cards in deck: {len(deck)}.")
