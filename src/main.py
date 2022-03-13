@@ -93,7 +93,6 @@ if __name__ == "__main__":
             round_id += 1
             logging.info(f"\n\n-~=ROUND #{round_id}=~-\n")
             logging.info(f"Num cards in deck/table: {len(deck)}/{len(table)}.")
-            # TODO rename to sets_on_table (also in dataframe)
             sets = get_sets_on_table(table)
             num_sets = len(sets)
             logging.info(f"Found {num_sets} SET(s) on the table.")
@@ -194,7 +193,7 @@ if __name__ == "__main__":
         )
         simul_data = pd.concat([simul_data, game_data], ignore_index=True)
 
-time_ = datetime.now()
-data_file_name = f"set_simul_{time_.strftime('%Y%m%d')}_{time_.strftime('%f')}.pkl"
-artifacts_folder = os.path.join("artifacts", data_file_name)
-simul_data.to_pickle(artifacts_folder)
+    time_ = datetime.now()
+    data_file_name = f"set_simul_{time_.strftime('%Y%m%d')}_{time_.strftime('%f')}.pkl"
+    artifacts_folder = os.path.join("artifacts", data_file_name)
+    simul_data.to_pickle(artifacts_folder)
