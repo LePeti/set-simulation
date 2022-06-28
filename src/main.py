@@ -10,7 +10,7 @@ import pandas as pd
 import os
 from src.functions.draw_cards import draw_cards, translate_vecs_to_cards
 
-NUM_GAMES = 1000
+NUM_GAMES = 10
 VISUALIZE = False
 
 random.seed(123)
@@ -201,6 +201,9 @@ if __name__ == "__main__":
         simul_data = pd.concat([simul_data, game_data], ignore_index=True)
 
     time_ = datetime.now()
-    data_file_name = f"set_simul_{time_.strftime('%Y%m%d')}_{time_.strftime('%f')}_{NUM_GAMES}_games.pkl"
+    data_file_name = (
+        f"set_simul_{time_.strftime('%Y%m%d')}_{time_.strftime('%f')}_{NUM_GAMES}_games"
+        ".pkl"
+    )
     artifacts_folder = os.path.join("artifacts", data_file_name)
     simul_data.to_pickle(artifacts_folder)
