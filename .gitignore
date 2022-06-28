@@ -2,3 +2,6 @@ tests/__pycache__/*
 *.pyc
 .vscode/.ropeproject/objectdb
 .DS_Store
+.vscode/configurationCache.log
+.vscode/dryrun.log
+.vscode/targets.log
