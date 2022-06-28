@@ -14,5 +14,6 @@
     "editor.rulers": [
         90
     ],
-    "python.sortImports.path": "/usr/local/bin/isort"
+    "python.sortImports.path": "/usr/local/bin/isort",
+    "python.formatting.blackPath": "/Users/peterlukacs/.pyenv/versions/set-simul-3.8.1/bin/black"
 }
