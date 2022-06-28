@@ -10,7 +10,7 @@ import pandas as pd
 import os
 from src.functions.draw_cards import draw_cards, translate_vecs_to_cards
 
-NUM_GAMES = 10
+NUM_GAMES = 10000
 VISUALIZE = False
 
 random.seed(123)

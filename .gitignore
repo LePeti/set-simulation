@@ -5,3 +5,4 @@ tests/__pycache__/*
 .vscode/configurationCache.log
 .vscode/dryrun.log
 .vscode/targets.log
+artifacts/set_simul_20220628_946169_10000_games.pkl
