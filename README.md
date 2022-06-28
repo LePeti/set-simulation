@@ -4,6 +4,15 @@
 ## Game flow
 ![game-flow](game-flow.png)
 
+## How to set up repo for development
+
+1. Prerequisites:
+   1. Pyenv (install with `brew install pyenv`),
+   2. Python 3.8.1 (install with `Pyenv install 3.8.1`),
+   3. Pyenv virtualenv plugin (install with `brew install pyenv-virtualenv`)
+2. Set the .python-version file to whatever Python version you have/want to use
+3. Test with `pyenv versions` from the terminal
+
 ## Columns of SET simulation data
 
 1. `game_id` - the ID of a complete game of SET
