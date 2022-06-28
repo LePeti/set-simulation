@@ -13,6 +13,10 @@
 2. Set the .python-version file to whatever Python version you have/want to use
 3. Test with `pyenv versions` from the terminal
 
+## How to run simulation
+
+From the terminal run `python -m src.main`
+
 ## Columns of SET simulation data
 
 1. `game_id` - the ID of a complete game of SET
