@@ -2,11 +2,16 @@ import logging
 import random
 from datetime import datetime
 from itertools import combinations, product
+from tqdm import tqdm
+
 
 import numpy as np
 import pandas as pd
 import os
 from src.functions.draw_cards import draw_cards, translate_vecs_to_cards
+
+NUM_GAMES = 1000
+VISUALIZE = False
 
 random.seed(123)
 logging.basicConfig(level=logging.WARNING)
@@ -77,8 +82,7 @@ def get_simul_data_col_names():
 if __name__ == "__main__":
     simul_data = pd.DataFrame(columns=get_simul_data_col_names())
     game_id = 0
-    for game in range(1):
-        logging.warning(f"Game simulation round #{game + 1} ({game + 1:.0f}%)")
+    for game in tqdm(range(NUM_GAMES)):
         game_id += 1
         deck = generate_shuffled_deck()
         deck, table = first_draw(deck)
@@ -115,7 +119,8 @@ if __name__ == "__main__":
                 round_data["round_type"] = "normal"
                 chosen_set = random.choice(sets)
                 round_data["chosen_set"] = [chosen_set]
-                draw_cards(translate_vecs_to_cards(chosen_set))
+                if VISUALIZE:
+                    draw_cards(translate_vecs_to_cards(chosen_set))
                 removed_sets.append(chosen_set)
                 table = remove_set_from_table(table, chosen_set)
                 deck, table = add_n_cards_to_table(deck, table, 12 - len(table))
@@ -181,8 +186,10 @@ if __name__ == "__main__":
         round_data["is_last_round"] = True
         round_data["chosen_set"] = [remaining_sets_on_table]
         game_data = pd.concat([game_data, round_data], ignore_index=True)
-
-        draw_cards(translate_vecs_to_cards(table), "Cards left on the table w/o any SETs")
+        if VISUALIZE:
+            draw_cards(
+                translate_vecs_to_cards(table), "Cards left on the table w/o any SETs"
+            )
         logging.info("No more cards in deck, no more sets on table.")
 
         logging.info(f"Remaining cards in deck: {len(deck)}.")
@@ -194,6 +201,6 @@ if __name__ == "__main__":
         simul_data = pd.concat([simul_data, game_data], ignore_index=True)
 
     time_ = datetime.now()
-    data_file_name = f"set_simul_{time_.strftime('%Y%m%d')}_{time_.strftime('%f')}.pkl"
+    data_file_name = f"set_simul_{time_.strftime('%Y%m%d')}_{time_.strftime('%f')}_{NUM_GAMES}_games.pkl"
     artifacts_folder = os.path.join("artifacts", data_file_name)
     simul_data.to_pickle(artifacts_folder)
